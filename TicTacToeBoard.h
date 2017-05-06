@@ -23,9 +23,14 @@ using namespace std;
 
 class TicTacToeBoard
 {
+    
+private:
     char Board[3][3];
     bool XsWon;
     bool OsWon;
+    list<pair <int,int> > BlankSpacePositions;
+    list<pair <int,int> > XPositions;
+    list<pair <int,int> > OPositions;
         
 public:
     TicTacToeBoard()
@@ -53,9 +58,9 @@ public:
     void GetRandomBlankSpace(int& Row, int& Column);
     void Reset();
     void PrintSpacesLists();
-    list<pair <int,int> > BlankSpacePositions;
-    list<pair <int,int> > XPositions;
-    list<pair <int,int> > OPositions;
+    list<pair <int,int> > GetBlankSpacePositions() {return BlankSpacePositions;}
+    list<pair <int,int> > GetXPositions() {return XPositions;}
+    list<pair <int,int> > GetOPositions() {return OPositions;}
 };
 
 #endif /* TICTACTOEBOARD_H */

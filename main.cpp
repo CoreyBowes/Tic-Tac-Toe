@@ -29,7 +29,7 @@ using namespace std;
 
 void PlayTicTacToePvP(TicTacToeBoard playBoard, bool bXStarts);
 void PlayTicTacToePvC(TicTacToeBoard playBoard, bool bXStarts, bool bPlayerStarts, int iDifficulty);
-void PlayTicTacToeCvC(TicTacToeBoard playBoard, bool bPrintGame, int iGamesToPlay, int iFirstPlayerDifficulty, int iSecondPlayerDifficulty); // Automatically plays games between two computer opponents at the given difficulties.
+void PlayTicTacToeCvC(TicTacToeBoard playBoard, bool bPrintGame, int iGamesToPlay, int iFirstPlayerDifficulty, int iSecondPlayerDifficulty);
 void PlayerMove(TicTacToeBoard& playBoard, bool bIsCurrentPlayerX);
 void ComputerMove(TicTacToeBoard& playBoard, bool bIsCurrentPlayerX, int iDifficulty);
 
@@ -46,7 +46,7 @@ int main(int argc, char** argv) {
 ****/
     bool bExit=false;
     while(!bExit)
-    {
+    { // Main menu.
         cout<<"Welcome to Tic Tac Toe! Please enter a number to select an option: \n"
                 <<"1) Play game Player vs Player\n"
                 <<"2) Play game Player vs Computer\n"
@@ -479,6 +479,12 @@ void PlayerMove(TicTacToeBoard& playBoard, bool bIsCurrentPlayerX)
 
 void ComputerMove(TicTacToeBoard& playBoard, bool bIsCurrentPlayerX, int iDifficulty)
 {
+    /***********
+     * Difficulty 0: Plays in the first open spot starting from the top left.
+     * Difficulty 1: Plays in a random open spot.
+     * Difficulty 2: Completes a three-in-a-row if possible, otherwise blocks if 
+     * possible, otherwise plays randomly.
+    ***********/
     if(iDifficulty==0)
     {
         bool bMoveMade=false;
@@ -517,15 +523,15 @@ void ComputerMove(TicTacToeBoard& playBoard, bool bIsCurrentPlayerX, int iDiffic
     }
     else if(iDifficulty==2)
     {
-        list<pair<int,int> >::iterator FirstIterator=(playBoard.BlankSpacePositions).begin();
-        list<pair<int,int> > ListToCheck=playBoard.BlankSpacePositions;
+        list<pair<int,int> >::iterator FirstIterator=(playBoard.GetBlankSpacePositions()).begin();
+        list<pair<int,int> > ListToCheck=playBoard.GetBlankSpacePositions();
         if(bIsCurrentPlayerX)
         {
-            ListToCheck=playBoard.XPositions;
+            ListToCheck=playBoard.GetXPositions();
         }
         else
         {
-            ListToCheck=playBoard.OPositions;
+            ListToCheck=playBoard.GetOPositions();
         }
         FirstIterator=ListToCheck.begin();
         bool bMoveMade=false;
@@ -607,11 +613,11 @@ void ComputerMove(TicTacToeBoard& playBoard, bool bIsCurrentPlayerX, int iDiffic
         }
         if(bIsCurrentPlayerX)
         {
-            ListToCheck=playBoard.OPositions;
+            ListToCheck=playBoard.GetOPositions();
         }
         else
         {
-            ListToCheck=playBoard.XPositions;
+            ListToCheck=playBoard.GetXPositions();
         }
         FirstIterator=ListToCheck.begin();
         for(; FirstIterator!=ListToCheck.end(); FirstIterator++)

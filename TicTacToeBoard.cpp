@@ -21,9 +21,9 @@ using namespace std;
 
 void TicTacToeBoard::PrintBoard()
 {
-    cout<<Board[0][0]<<Board[0][1]<<Board[0][2]<<"\n"<<Board[1][0]<<
-            Board[1][1]<<Board[1][2]<<"\n"<<Board[2][0]<<Board[2][1]<<
-            Board[2][2]<<"\n";
+    cout<<"  1 2 3"<<"\n"<<"1 "<<Board[0][0]<<" "<<Board[0][1]<<" "<<Board[0][2]<<"\n"<<
+            "2 "<<Board[1][0]<<" "<<Board[1][1]<<" "<<Board[1][2]<<"\n"<<
+            "3 "<<Board[2][0]<<" "<<Board[2][1]<<" "<<Board[2][2]<<"\n";
 }
 
 bool TicTacToeBoard::AddX(int Row, int Column)
